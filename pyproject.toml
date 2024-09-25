@@ -1,0 +1,76 @@
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.1"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.poetry]
+name = "easy-db"
+version = "0.1.0"
+description = "A python library for a streamlined database experience from a yaml config file"
+authors = ["Victor Nguyen"]
+homepage = "https://github.com/hotnsoursoup/easy-db"
+repository = "https://github.com/hotnsoursoup/easy-db"
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyaml-env = "^1.2.1"
+pydantic = "^2.9.1"
+sqlfluff = "^3.1.1"
+SQLAlchemy = "^2.0.34"
+glom = "^23.5.0"
+pymysql = "^1.1.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+ruff = "^0.6.4"
+bandit = "^1.7.9"
+black = "^24.8.0"
+isort = "^5.13.2"
+pre-commit = "^3.8.0"
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+exclude = [
+    "migrations",
+    "__pycache__",
+    "manage.py",
+    "settings.py",
+    "env",
+    ".env",
+    "venv",
+    ".venv",
+]
+
+[tool.ruff.lint]
+select = ["I", "F", "E7", "E9", "E4", "ANN201"] 
+ignore = ["I001"]
+
+[tool.ruff.lint.pep8-naming]
+staticmethod-decorators = [
+    "pydantic.validator",
+    "pydantic.root_validator",
+    "pydantic.model_validator"
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+
+[tool.isort]
+profile = "black"
+line_length = 77
+known_third_party = ["pydantic"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+lines_after_imports = 2
+skip_glob = ["**/venv/*", "**tests*.py"]
+combine_as_imports = true
+force_grid_wrap = 3
+
